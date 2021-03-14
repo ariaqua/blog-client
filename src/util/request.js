@@ -1,4 +1,5 @@
 import axios from 'axios'
+// import router from '@/router'
 
 const service = axios.create({
   baseURL: '/api',
@@ -7,8 +8,9 @@ const service = axios.create({
 
 service.interceptors.response.use(
   response => {
+    console.log(response)
     const res = response.data
-    if (res.statusCode !== 200) {
+    if (res.statusCode !== 200 && res.statusCode !== 201) {
       return Promise.reject(new Error(res.message || 'Error'))
     } else {
       return res
@@ -16,6 +18,7 @@ service.interceptors.response.use(
   },
   error => {
     console.log(error.message)
+    // router.replace('/error')
     return Promise.reject(error)
   }
 )

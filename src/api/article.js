@@ -6,3 +6,11 @@ export function getList() {
     method: 'get'
   })
 }
+
+export function getDetail(id) {
+  return request({
+    url: `article/${id}`,
+    method: 'get'
+  })
+}
+
