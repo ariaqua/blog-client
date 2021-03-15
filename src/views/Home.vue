@@ -6,6 +6,8 @@ main.articles
     p.date {{ new Date(article.create_date).toDateString() }}
     img.list-pictrue(:src="article.pictrue")
     p.summary {{ article.summary }}
+  div.more-wrapper(@click="loadMore")
+    span.more(:class="loadClass") {{ loadState }}
 </template>
 
 <script>
@@ -17,16 +19,49 @@ export default {
   data() {
     return {
       list: [],
+      count: 0,
+      skip: 0,
+      take: 10,
+      isLoading: false,
     };
   },
   beforeMount() {
     this.getList();
   },
+  computed: {
+    hasMore() {
+      return this.count > this.list.length
+    },
+    loadState() {
+      if (this.isLoading) {
+        return 'Loading...'
+      } else {
+        return this.hasMore ? 'Load more ->' : 'No more'
+      }
+    },
+    loadClass() {
+      return this.isLoading || !this.hasMore
+        ? 'no-more'
+        : 'load-more'
+    }
+  },
   methods: {
     async getList() {
-      const { data } = await getList();
-      this.list = data;
+      this.isLoading = true
+      const { data } = await getList(this.skip, this.take);
+      this.list.push(...data[0]);
+      this.count = data[1];
+      this.isLoading = false
     },
+    async loadMore() {
+      if (!this.hasMore || this.isLoading) return false
+      this.skip += 1
+      console.log('click')
+      const h = parseInt(getComputedStyle(document.querySelector('.list-article')).height)
+      await Promise.resolve(this.getList(this.skip, this.take))
+      await Promise.resolve(window.scrollBy({top: h + 50 , behavior: 'smooth' }))
+      
+    }
   },
 };
 </script>
@@ -72,6 +107,29 @@ export default {
 
 .summary {
   color: #666;
+}
+
+.more-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.more {
+  display: inline-block;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.25s;
+}
+
+.load-more {
+  color: #999;
+  &:hover {
+    color: teal;
+  }
+}
+
+.no-more {
+  color: #ccc;
 }
 
 @media (min-width: 576px) {

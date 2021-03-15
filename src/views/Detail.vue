@@ -1,4 +1,5 @@
 <template lang="pug">
+link(v-if="article.theme" rel="stylesheet" :href="article.theme")
 top-nav
 img.header-picture(:src='article.pictrue')
 main

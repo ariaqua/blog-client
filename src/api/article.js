@@ -1,9 +1,10 @@
 import request from '@/util/request';
 
-export function getList() {
+export function getList(skip = 0, take = 10) {
+  console.log(skip, take)
   return request({
-    url: 'article',
-    method: 'get'
+    url: `article?skip=${skip}&take=${take}`,
+    method: 'get',
   })
 }
 
