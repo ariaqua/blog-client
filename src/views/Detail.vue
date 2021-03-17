@@ -1,7 +1,8 @@
 <template lang="pug">
 link(v-if="article.theme" rel="stylesheet" :href="article.theme")
 top-nav
-img.header-picture(:src='article.pictrue')
+//- v-lazyLoad not trigger, the value is undefined, but Home is normal
+img.header-picture(:src="article.pictrue")
 main
   h1.title {{ article.title }}
   p.date {{ format(article.create_date) }}
@@ -26,12 +27,12 @@ export default {
   beforeMount() {
     this.getDetail();
   },
-  activated() {
-    if (this.id !== this.articleCache) {
-      this.getDetail();
-      this.articleCache = this.id
-    }
-  },
+  // activated() {
+  //   if (this.id !== this.articleCache) {
+  //     this.getDetail();
+  //     this.articleCache = this.id
+  //   }
+  // },
   methods: {
     async getDetail() {
       const { data } = await getDetail(this.id);

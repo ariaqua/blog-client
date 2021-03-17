@@ -1,5 +1,1 @@
-export default {
-  mounted(el, {value}) {
-    el.style.color = value
-  }
-}
+export { lazyLoad }from './lazyLoad/index.js'

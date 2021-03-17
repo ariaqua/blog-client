@@ -1,46 +1,50 @@
 const placeholder = 'https://img.zcool.cn/community/01bf7560503daa11013fb11748c517.jpg@1280w_1l_2o_100sh.jpg'
-const errorImg = 'http://localhost:5000/uploads/image/girl.jpg'
+const errorImg = 'http://localhost:5000/uploads/image/file-1615209801393-725033632.jpg'
 
-export const lazyLoad = {
-  inserted(el, { value }) {
+export const lazyLoad = 
+  (el, { value }) => {
     const io = new IntersectionObserver(
       entries => {
-        entries.forEach(entry => {
-          if (!entry.isIntersecting && !entry.target.dataset.flag) {
-            entry.target.src = placeholder
-            console.log('init')
-          }
-          if (entry.isIntersecting && !entry.target.dataset.flag) {
-            const img = new Image()
-            let counter = this.config.reloadNumber
-            img.src = value
-            img.addEventListener('error', () => {
-              entry.target.src = errorImg
+        const entry = entries[0]
+        // init
+        if (!entry.target.dataset.state) {
+          entry.target.src = placeholder
+        }
+        if (entry.isIntersecting && !entry.target.dataset.state) {
+          const img = new Image()
+          let counter = 2
+          img.src = value
+          console.log(value)
+          // error
+          img.addEventListener('error', () => {
+            entry.target.src = errorImg
 
-              if (counter) {
-                entry.target.title = `Click to reload ${counter}/${this.config.reloadNumber}`
-                entry.target.addEventListener('click', function () {
-                  img.src = value
-                }, { once: true })
-                counter--
-              } else {
-                entry.target.title = 'Loaded failed'
-              }
+            // click to load
+            if (counter) {
+              entry.target.title = `Click to reload ${counter}/${2}`
+              entry.target.addEventListener('click', function () {
+                img.src = value
+              }, { once: true })
+              counter--
+            } else {
+              entry.target.title = 'Loaded failed'
+            }
 
-            })
-            img.addEventListener('load', () => {
-              console.log('load')
-              entry.target.src = value
-            })
-            entry.target.dataset.flag = true
-            console.log('entry')
-          }
-        })
+            entry.target.dataset.state = 'failed'
+          })
+
+          // load
+          img.addEventListener('load', () => {
+            entry.target.src = value
+            entry.target.dataset.state = 'loaded'
+          })
+
+        }
       },
-      { rootMargin: this.config.rootMargin }
+      { rootMargin: '100px' }
     )
 
     io.observe(el)
 
   }
-}
+

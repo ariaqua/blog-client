@@ -5,16 +5,14 @@ main.articles
     router-link.title(:to="'/' + article.id" tag="h1") {{ article.title }}
     p.date {{ new Date(article.create_date).toDateString() }}
     img.list-pictrue(v-lazyLoad="article.pictrue")
-    p.summary(v-color="'red'") {{ article.summary }}
-  div.more-wrapper(:src="loadMore")
+    p.summary {{ article.summary }}
+  div.more-wrapper(:src="loadMore", @click="loadMore")
     span.more(:class="loadClass") {{ loadState }}
 </template>
 
 <script>
 import { getList } from '@/api/article';
 import TopNav from '@/components/TopNav/index';
-import {lazyLoad} from '@/directives/lazyLoad/index'
-import color from '@/directives/index'
 export default {
   name: 'Home',
   components: { TopNav },
@@ -23,19 +21,9 @@ export default {
       list: [],
       count: 0,
       skip: 0,
-      take: 10,
+      take: 1,
       isLoading: false,
     };
-  },
-  directives: {
-    lazyLoad,
-    color,
-    focus: {
-      // 指令的定义
-      mounted(el) {
-        el.focus()
-      }
-    }
   },
   beforeMount() {
     this.getList();
@@ -66,6 +54,7 @@ export default {
       this.isLoading = false
     },
     async loadMore() {
+      console.log(this.hasMore, this.isLoading)
       if (!this.hasMore || this.isLoading) return false
       this.skip += 1
       console.log('click')
