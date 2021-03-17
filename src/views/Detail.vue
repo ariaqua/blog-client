@@ -63,6 +63,12 @@ export default {
   margin-bottom: 48px;
 }
 
+@media (min-width: 992px) {
+  .header-picture {
+    height: 40vw;
+  }
+}
+
 @media (min-width: 1400px) {
   .header-picture {
     width: 800px;

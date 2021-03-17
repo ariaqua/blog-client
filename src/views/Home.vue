@@ -4,15 +4,17 @@ main.articles
   article.list-article(v-for="article in list", :key="article.id")
     router-link.title(:to="'/' + article.id" tag="h1") {{ article.title }}
     p.date {{ new Date(article.create_date).toDateString() }}
-    img.list-pictrue(:src="article.pictrue")
-    p.summary {{ article.summary }}
-  div.more-wrapper(@click="loadMore")
+    img.list-pictrue(v-lazyLoad="article.pictrue")
+    p.summary(v-color="'red'") {{ article.summary }}
+  div.more-wrapper(:src="loadMore")
     span.more(:class="loadClass") {{ loadState }}
 </template>
 
 <script>
 import { getList } from '@/api/article';
-import TopNav from '@/components/TopNav/index'
+import TopNav from '@/components/TopNav/index';
+import {lazyLoad} from '@/directives/lazyLoad/index'
+import color from '@/directives/index'
 export default {
   name: 'Home',
   components: { TopNav },
@@ -24,6 +26,16 @@ export default {
       take: 10,
       isLoading: false,
     };
+  },
+  directives: {
+    lazyLoad,
+    color,
+    focus: {
+      // 指令的定义
+      mounted(el) {
+        el.focus()
+      }
+    }
   },
   beforeMount() {
     this.getList();
