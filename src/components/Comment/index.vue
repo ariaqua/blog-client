@@ -66,6 +66,12 @@ export default {
       
       wrapper.append(reply);
 
+      const alia = document.querySelector('.deep-reply-container .alia')
+      const email = document.querySelector('.deep-reply-container .email')
+      alia.value = localStorage.getItem('alia')
+      email.value = localStorage.getItem('email')
+
+      window.cancel = this.cancel
       window.deepCreateCommet = this.deepCreateCommet
       window.deepReplyPayload = {
         parentId: _parentId,
@@ -96,6 +102,8 @@ export default {
       if (!payload.email) delete payload.email
       const { data } = await createComment(payload)
       console.log(data)
+      localStorage.setItem('alia', alia.value)
+      localStorage.setItem('email', email.value)
       this.cancel()
       this.getComments();
     },
@@ -111,7 +119,7 @@ export default {
             </div>
             <textarea class="comment-content" placeholder="Say Something (Required)" Required="Required" maxlength="24" minlength="2"></textarea>
             <button class="btn submit" type="submit" onclick="deepCreateCommet()">Submit</button>
-            <button class="btn cancel" type="button" onclick="this.parentElement.parentElement.style.display = 'none'">Cancel</button>
+            <button class="btn cancel" type="button" onclick="cancel('cancel')">Cancel</button>
           </div>
         `;
         reply.id = 'reply';
@@ -120,10 +128,13 @@ export default {
       reply.style.display = 'block';
       return reply
     },
-    cancel() {
+    cancel(flag) {
       const reply = document.getElementById('reply');
-      const cancel = document.getElementById('cancel');
-      cancel.onclick = () => (reply.style.display = 'none');
+      if (!flag) {
+        const comment = reply.querySelector('.comment-content')
+        comment.value = ''
+      }
+      reply.style.display = 'none';
     },
   },
 };

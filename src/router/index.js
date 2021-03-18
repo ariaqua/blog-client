@@ -1,4 +1,5 @@
-import { createRouter, createWebHistory } from 'vue-router'
+// eslint-disable-next-line no-unused-vars
+import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Detail from '../views/Detail.vue'
 import Error from '../views/Error.vue'
@@ -24,14 +25,19 @@ const routes = [
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/:pathMatch(.*)',
+    path: '/error',
     name: 'Error',
     component: Error
+  },
+  {
+    path: '/:pathMatch(.*)',
+    redirect: '/error'
   }
 ]
 
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
+  // history: createWebHashHistory(),
   routes
 })
 

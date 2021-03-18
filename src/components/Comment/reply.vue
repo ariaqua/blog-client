@@ -34,12 +34,19 @@ export default {
     };
   },
   props: ['id'],
+  beforeMount() {
+    this.alia = localStorage.getItem('alia') || ''
+    this.email = localStorage.getItem('email') || ''
+  },
   methods: {
     async submit() {
       if (!this.comment.email) {
         delete this.comment.email
       }
       this.$emit('create-comment', this.comment)
+      localStorage.setItem('alia', this.alia)
+      localStorage.setItem('email', this.email)
+      this.comment.comment = ''
     },
   },
 };

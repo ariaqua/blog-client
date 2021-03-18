@@ -2,7 +2,9 @@
 //- link(v-if="article.theme" rel="stylesheet" :href="article.theme")
 top-nav
 //- Bug: v-lazyLoad not trigger
-div.header-picture(:style="{backgroundImage: `url(${article.pictrue})`}")
+//- Bug: style backgroundImage undfined
+//- div.header-picture(:style="{backgroundImage: `url(${article.pictrue})`}")
+img.header-picture(:src="article.pictrue")
 main
   h1.title {{ article.title }}
   p.date {{ format(article.create_date) }}
@@ -35,12 +37,17 @@ export default {
   // },
   methods: {
     async getDetail() {
-      const { data } = await getDetail(this.id);
-      this.article = data;
-      console.log(data);
+      try {
+        const { data } = await getDetail(this.id);
+        this.article = data;
+        console.log(data);
+      } catch (error) {
+        this.$router.replace({ name: 'Error' })
+      }
+     
     },
     format(date) {
-      return dayjs(date).format('HH:mm YYYY-MM-DD');
+      return dayjs(date).format('YYYY-MM-DD');
     },
   },
 };
