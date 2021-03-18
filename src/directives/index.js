@@ -1,1 +1,1 @@
-export { lazyLoad }from './lazyLoad/index.js'
+export { lazyLoad } from './lazyLoad/index.js'

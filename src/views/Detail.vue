@@ -1,8 +1,8 @@
 <template lang="pug">
-link(v-if="article.theme" rel="stylesheet" :href="article.theme")
+//- link(v-if="article.theme" rel="stylesheet" :href="article.theme")
 top-nav
-//- v-lazyLoad not trigger, the value is undefined, but Home is normal
-img.header-picture(:src="article.pictrue")
+//- Bug: v-lazyLoad not trigger
+div.header-picture(:style="{backgroundImage: `url(${article.pictrue})`}")
 main
   h1.title {{ article.title }}
   p.date {{ format(article.create_date) }}
@@ -51,6 +51,9 @@ export default {
   width: 100%;
   height: 50vw;
   max-height: 650px;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 .date {
