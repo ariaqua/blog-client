@@ -1,5 +1,5 @@
 <template lang="pug">
-reply(:id='id', @create-comment='createComment')
+reply(:id='id', :avatar='avatar', @create-comment='createComment')
 .comments-wrapper
   .comment(v-for='comment in comments', :key='comment.id')
     .first-comment
@@ -8,7 +8,7 @@ reply(:id='id', @create-comment='createComment')
         .__alia_date
           p.alia {{ comment.alia }}
           p.date {{ format(comment.date) }}
-        p.reply(@click='reply(comment.id)') Reply
+        p.reply(@click='reply(comment.id, 0, 0, 0, $event)') Reply
       .comment-content {{ comment.comment }}
         .secondary-reply(:id='comment.id')
     .secondary-comment(
@@ -21,7 +21,7 @@ reply(:id='id', @create-comment='createComment')
           p.alia {{ secondaryComment.alia }}
             span.deep-comment-alia(v-if='secondaryComment.deep_reply_id') &nbsp;@ {{ secondaryComment.deep_reply_alia }}
           p.date {{ format(secondaryComment.date) }}
-        p.reply(@click='reply(comment.id, secondaryComment.id, secondaryComment.alia, secondaryComment.email)') Reply
+        p.reply(@click='reply(comment.id, secondaryComment.id, secondaryComment.alia, secondaryComment.email, $event)') Reply
       .comment-content {{ secondaryComment.comment }}
         .secondary-reply(:id='secondaryComment.id')
 </template>
@@ -31,33 +31,53 @@ import dayjs from 'dayjs';
 import { getComments } from '@/api/comment';
 import { createComment } from '@/api/comment';
 import reply from './reply';
+import { getAvatar, validateAvatar } from '@/api/comment'
 export default {
   name: 'Comment',
   components: { reply },
   data() {
     return {
       comments: [],
+      avatar: ''
     };
   },
   props: ['id'],
   beforeMount() {
     this.getComments();
+    this.validateAvatar()
   },
   methods: {
+    async validateAvatar() {
+      const avatar = localStorage.getItem('avatar')
+      if (avatar) {
+        const { data } = await validateAvatar(avatar)
+        if (!data) {
+          this.getAvatar()
+        } else {
+          this.avatar = localStorage.getItem('avatar')
+        }
+      } else {
+        this.getAvatar()
+      }
+    },
+    async getAvatar() {
+      const { data } = await getAvatar()
+      this.avatar = data
+    },
     async getComments() {
       const { data } = await getComments(this.id);
-      console.log(data);
       this.comments = data;
     },
     format(date) {
       return dayjs(date).format('HH:mm YYYY-MM-DD');
     },
     async createComment(comment) {
+      console.log(comment)
       const { data } = await createComment(comment);
       this.getComments();
       console.log(data);
     },
-    reply(_parentId, _secondaryCommentId, _secondaryCommentAlia, _secondaryCommentEmail) {
+    reply(_parentId, _secondaryCommentId, _secondaryCommentAlia, _secondaryCommentEmail, e) {
       const reply =  this.initDeepComment()
       let wrapper
       _secondaryCommentId
@@ -79,6 +99,15 @@ export default {
         deep_reply_alia: _secondaryCommentAlia || null,
         deep_reply_email: _secondaryCommentEmail || null,
       };
+
+      const replyHeight = parseInt(getComputedStyle(document.getElementById('reply')).height) + 100
+      const documentHeight = document.documentElement.clientHeight
+      let _h = documentHeight - e.clientY
+
+      if (_h < replyHeight) {
+        window.scrollBy({top: replyHeight - _h , behavior: 'smooth' })
+      }
+
     },
     async deepCreateCommet() {
       const alia = document.querySelector('.deep-reply-container .alia')
@@ -91,7 +120,7 @@ export default {
       const { parentId, deep_reply_id, deep_reply_alia ,deep_reply_email } = window.deepReplyPayload
       const payload = {
         alia: alia.value,
-        avatar: 'http://cdn.u2.huluxia.com/g3/M00/2A/74/wKgBOVwKin-APdabAADFkZN89Ok088.jpg',
+        avatar: this.avatar,
         email:  email.value,
         comment:  comment.value,
         parent: parentId,
@@ -104,6 +133,7 @@ export default {
       console.log(data)
       localStorage.setItem('alia', alia.value)
       localStorage.setItem('email', email.value)
+      localStorage.setItem('avatar', this.avatar)
       this.cancel()
       this.getComments();
     },

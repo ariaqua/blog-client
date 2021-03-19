@@ -8,10 +8,22 @@ export function getComments(id) {
 }
 
 export function createComment(data) {
-  console.log(data)
   return request({
     url: 'comment',
     method: 'post',
     data
   })
 }
+
+export function getAvatar() {
+  return request({
+    url: 'album/avatar',
+  })
+}
+
+export function validateAvatar(avatar) {
+  return request({
+    url: `album/validateAvatar?url=${avatar}`,
+  })
+}
+

@@ -8,7 +8,7 @@ form.reply-container(@submit.prevent='submit')
       maxlength='8',
       minlength='2'
     )
-    input.email(v-model="comment.email", placeholder='Email', type='email')
+    input.email(v-model="comment.email", placeholder='Email', maxlength='20', pattern='\\w+@\\w+\\.\\w+')
   textarea.comment-content(
     v-model="comment.comment"
     placeholder='Say Something (Required)',
@@ -20,6 +20,7 @@ form.reply-container(@submit.prevent='submit')
 </template>
 
 <script>
+
 export default {
   name: 'Reply',
   data() {
@@ -28,26 +29,28 @@ export default {
         alia: '',
         email: '',
         comment: '',
-        avatar: 'http://cdn.u2.huluxia.com/g3/M00/2A/74/wKgBOVwKin-APdabAADFkZN89Ok088.jpg',
+        avatar: '',
         article: +this.id,
       },
     };
   },
-  props: ['id'],
+  props: ['id', 'avatar'],
   beforeMount() {
-    this.alia = localStorage.getItem('alia') || ''
-    this.email = localStorage.getItem('email') || ''
+    this.comment.alia = localStorage.getItem('alia') || ''
+    this.comment.email = localStorage.getItem('email') || ''
   },
   methods: {
     async submit() {
       if (!this.comment.email) {
         delete this.comment.email
       }
+      this.comment.avatar = this.avatar
       this.$emit('create-comment', this.comment)
-      localStorage.setItem('alia', this.alia)
-      localStorage.setItem('email', this.email)
+      localStorage.setItem('alia', this.comment.alia)
+      localStorage.setItem('email', this.comment.email)
+      localStorage.setItem('avatar', this.comment.avatar)
       this.comment.comment = ''
-    },
+    }
   },
 };
 </script>
