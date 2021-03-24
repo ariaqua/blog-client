@@ -38,7 +38,15 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   // history: createWebHashHistory(),
-  routes
+  routes,
+  // scrollBehavior (to, from, savedPosition) {
+  //   console.log('scrollBehavior')
+  //   if (savedPosition) {
+  //     return savedPosition
+  //   } else {
+  //     return { top: 0 }
+  //   }
+  // },
 })
 
 export default router

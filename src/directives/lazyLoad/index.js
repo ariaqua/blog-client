@@ -70,14 +70,15 @@ export const lazyLoad = {
   //   console.log('---------updated----------')
   //   console.log(bindding)
   //   console.log('---------updated----------')
-    
+  //   // el.src = bindding.value
+  //   // io(bindding).observe(el)
   // },
-  beforeUnmount(el, bindding) {
-    console.log('---------beforeUnmount----------')
-    console.log(bindding)
-    console.log('---------beforeUnmount----------')
-    io(bindding).disconnect()
-  },
+  // beforeUnmount(el, bindding) {
+  //   console.log('---------beforeUnmount----------')
+  //   console.log(bindding)
+  //   console.log('---------beforeUnmount----------')
+  //   io(bindding).disconnect()
+  // },
   // unmounted(el, bindding) {
   //   console.log('---------unmounted----------')
   //   console.log(bindding)

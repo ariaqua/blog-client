@@ -2,7 +2,7 @@ import axios from 'axios'
 // import router from '@/router'
 
 const service = axios.create({
-  baseURL: '/api',
+  baseURL: '/blog',
   timeout: 5000
 })
 

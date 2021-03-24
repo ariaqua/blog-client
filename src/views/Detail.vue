@@ -1,10 +1,11 @@
 <template lang="pug">
 //- link(v-if="article.theme" rel="stylesheet" :href="article.theme")
-top-nav
+top-nav(class="detail-top-nav")
 //- Bug: v-lazyLoad not trigger
 //- Bug: style backgroundImage undfined
-//- div.header-picture(:style="{backgroundImage: `url(${article.pictrue})`}")
-img.header-picture(:src="article.pictrue")
+div.header-picture(:style="{backgroundImage: `url(${article.pictrue})`}")
+//- img.header-picture(v-lazyLoad="article.pictrue")
+//- img.header-picture(:src="article.pictrue")
 main
   h1.title {{ article.title }}
   p.date {{ format(article.create_date) }}
@@ -53,14 +54,23 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
+.detail-top-nav {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  background-color: rgba($color: white, $alpha: 0.7);
+  backdrop-filter: blur(6px);
+}
+
 .header-picture {
   width: 100%;
-  height: 50vw;
+  height: 70vw;
   max-height: 650px;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: whitesmoke;
 }
 
 .date {
@@ -74,9 +84,9 @@ export default {
   margin-bottom: 48px;
 }
 
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   .header-picture {
-    height: 40vw;
+    height: 60vw;
   }
 }
 
@@ -84,9 +94,8 @@ export default {
   .header-picture {
     width: 800px;
     display: block;
-    margin: 0 auto;
+    margin: 120px auto 0;
     height: 450px;
-    margin-top: 32px;
   }
 }
 </style>
