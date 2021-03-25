@@ -25,8 +25,39 @@ main {
   box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  overflow: auto;
+  position: absolute;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #bebebe;
+  min-height: 25px;
+  min-width: 25px;
+  border: 1px solid #e0e0e0;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f7f7f7;
+  border: 1px solid #efefef;
+}
+
 @media (min-width: 576px) {
   main {
     margin: 42px auto;
+  }
+}
+
+@keyframes menu-show {
+  0% {
+    opacity: 0;
+    transform: translateY(-4rem);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

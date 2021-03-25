@@ -40,7 +40,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .nav {
   height: 72px;
   background-color: white;
@@ -130,15 +130,4 @@ export default {
   }
 }
 
-@keyframes menu-show {
-  0% {
-    opacity: 0;
-    transform: translateY(-4rem);
-  }
-
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 </style>

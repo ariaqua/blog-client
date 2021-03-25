@@ -54,7 +54,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .detail-top-nav {
   position: fixed;
   width: 100%;
@@ -86,7 +86,7 @@ export default {
 
 @media (min-width: 768px) {
   .header-picture {
-    height: 60vw;
+    height: 50vw;
   }
 }
 

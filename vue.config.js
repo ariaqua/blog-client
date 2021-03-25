@@ -1,4 +1,7 @@
+const isDev = process.env.NODE_ENV === 'development'
+
 module.exports = {
+  publicPath: isDev ? '/client' : '/',
   // devServer: {
   //   proxy: 'http://localhost:5000'
   // },

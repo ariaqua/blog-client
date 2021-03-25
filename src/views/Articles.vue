@@ -2,7 +2,7 @@
 top-nav
 main.articles
   article.list-article(v-for="article in list", :key="article.id")
-    router-link.title(:to="'/' + article.id" tag="h1") {{ article.title }}
+    router-link.title(:to="'/articles/' + article.id" tag="h1") {{ article.title }}
     p.date {{ new Date(article.create_date).toDateString() }}
     img.list-pictrue(v-lazyLoad="article.pictrue")
     p.summary {{ article.summary }}
@@ -14,7 +14,7 @@ main.articles
 import { getList } from '@/api/article';
 import TopNav from '@/components/TopNav/index';
 export default {
-  name: 'Home',
+  name: 'List',
   components: { TopNav },
   data() {
     return {
