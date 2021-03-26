@@ -41,7 +41,6 @@ export default {
       try {
         const { data } = await getDetail(this.id);
         this.article = data;
-        console.log(data);
       } catch (error) {
         this.$router.replace({ name: 'Error' })
       }

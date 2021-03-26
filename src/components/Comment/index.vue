@@ -72,10 +72,8 @@ export default {
       return dayjs(date).format('HH:mm YYYY-MM-DD');
     },
     async createComment(comment) {
-      console.log(comment)
-      const { data } = await createComment(comment);
+      await createComment(comment);
       this.getComments();
-      console.log(data);
     },
     reply(_parentId, _secondaryCommentId, _secondaryCommentAlia, _secondaryCommentEmail, e) {
       const reply =  this.initDeepComment()
@@ -129,8 +127,7 @@ export default {
         deep_reply_email,
       };
       if (!payload.email) delete payload.email
-      const { data } = await createComment(payload)
-      console.log(data)
+      await createComment(payload)
       localStorage.setItem('alia', alia.value)
       localStorage.setItem('email', email.value)
       localStorage.setItem('avatar', this.avatar)

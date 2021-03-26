@@ -54,10 +54,8 @@ export default {
       this.isLoading = false
     },
     async loadMore() {
-      console.log(this.hasMore, this.isLoading)
       if (!this.hasMore || this.isLoading) return false
       this.skip += 1
-      console.log('click')
       const h = parseInt(getComputedStyle(document.querySelector('.list-article')).height)
       await Promise.resolve(this.getList(this.skip, this.take))
       await Promise.resolve(window.scrollBy({top: h + 50 , behavior: 'smooth' }))

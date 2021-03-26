@@ -8,7 +8,7 @@ const service = axios.create({
 
 service.interceptors.response.use(
   response => {
-    console.log(response)
+    // console.log(response)
     const res = response.data
     if (res.statusCode !== 200 && res.statusCode !== 201) {
       return Promise.reject(new Error(res.message || 'Error'))

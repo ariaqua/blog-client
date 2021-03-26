@@ -13,9 +13,9 @@ const io = function(bindding) {
         const img = new Image()
         let counter = 2
         img.src = bindding.value
-        console.log('---------mounted----------')
-        console.log(bindding)
-        console.log('---------mounted----------')
+        // console.log('---------mounted----------')
+        // console.log(bindding)
+        // console.log('---------mounted----------')
 
         // error
         img.addEventListener('error', () => {
