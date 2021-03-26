@@ -1,8 +1,11 @@
 import axios from 'axios'
-// import router from '@/router'
+
+const url = process.env.NODE_ENV === 'production'
+  ? 'https://api.vaqua.top/blog'
+  : '/blog'
 
 const service = axios.create({
-  baseURL: '/blog',
+  baseURL: url,
   timeout: 5000
 })
 
