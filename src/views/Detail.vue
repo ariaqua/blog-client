@@ -9,7 +9,7 @@ div.header-picture(:style="{backgroundImage: `url(${article.pictrue})`}")
 main
   h1.title {{ article.title }}
   p.date {{ format(article.create_date) }}
-  .content(v-html='article.content')
+  .md.content(v-html='article.content')
   comment(:id="id")
 </template>
 
@@ -76,7 +76,7 @@ export default {
 .date {
   font-size: 14px;
   color: #bbb;
-  margin: 4px 0 12px;
+  margin: 4px 0 24px;
 }
 
 .content {

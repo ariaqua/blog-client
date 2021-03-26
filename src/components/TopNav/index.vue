@@ -1,6 +1,6 @@
 <template lang="pug">
 nav.nav
-  router-link.brand(:to='{ path: "/" }') VAQUA
+  router-link.brand(:to='{ path: "/articles" }') VAQUA
   .menu
     .text Explore
     svg.icon(
@@ -31,7 +31,7 @@ export default {
     return {
       links: [
         { name: 'Home', href: '/' },
-        { name: 'Profile', href: '/' },
+        // { name: 'Profile', href: '/' },
         { name: 'Github', href: 'https://github.com/ariaqua' },
         { name: 'Juejin', href: 'https://juejin.cn/user/3350967174300909' },
       ],

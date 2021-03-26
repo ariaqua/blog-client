@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 
 import '@/styles/index.scss'
+import '@/styles/modest.scss'
 
 import * as directives from '@/directives/index'
 
