@@ -47,7 +47,7 @@ export default {
       this.comment.avatar = this.avatar
       this.$emit('create-comment', this.comment)
       localStorage.setItem('alia', this.comment.alia)
-      localStorage.setItem('email', this.comment.email)
+      localStorage.setItem('email', this.comment.email || '')
       localStorage.setItem('avatar', this.comment.avatar)
       this.comment.comment = ''
     }

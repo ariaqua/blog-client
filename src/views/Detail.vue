@@ -18,6 +18,7 @@ import { getDetail } from '@/api/article';
 import dayjs from 'dayjs';
 import TopNav from '@/components/TopNav/index'
 import Comment from '@/components/Comment/index'
+import throttle from '@/util/throttle'
 export default {
   name: 'Detail',
   props: ['id'],
@@ -25,10 +26,15 @@ export default {
   data() {
     return {
       article: {},
+      y: 0
     };
   },
   beforeMount() {
     this.getDetail();
+    window.addEventListener('scroll', this.scroll)
+  },
+  beforeUnmount() {
+    window.removeEventListener('scroll', this.scroll)
   },
   // activated() {
   //   if (this.id !== this.articleCache) {
@@ -49,6 +55,31 @@ export default {
     format(date) {
       return dayjs(date).format('YYYY-MM-DD');
     },
+    scroll: throttle(
+      function() {
+        const nav = document.querySelector('.detail-top-nav')
+        let _y = document.documentElement.scrollTop
+        if (_y > this.y) {
+          nav.style.transform = 'translateY(-73px)'
+        } else {
+          nav.style.transform = 'translateY(0)'
+        }
+        setTimeout(() => {
+          this.y = _y
+        }, 20);
+      }, 500
+    ),
+    throttle(func, wait) {
+      let timer
+      return function(...arg) {
+        if (!timer) {
+          timer = setTimeout(() => {
+            timer = null
+            func.apply(this, arg)
+          }, wait)
+        }
+      }
+    }
   },
 };
 </script>
@@ -60,6 +91,8 @@ export default {
   top: 0;
   background-color: rgba($color: white, $alpha: 0.7);
   backdrop-filter: blur(6px);
+  transition: all 0.5s;
+  z-index: 100;
 }
 
 .header-picture {

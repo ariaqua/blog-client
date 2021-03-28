@@ -1,5 +1,5 @@
 <template lang="pug">
-reply(:id='id', :avatar='avatar', @create-comment='createComment')
+reply(ref="reply" :id='id', :avatar='avatar', @create-comment='createComment')
 .comments-wrapper
   .comment(v-for='comment in comments', :key='comment.id')
     .first-comment
@@ -74,6 +74,7 @@ export default {
     async createComment(comment) {
       await createComment(comment);
       this.getComments();
+      this.$toast('评论成功', 3000, { left: '50%', bottom: '40px' })
     },
     reply(_parentId, _secondaryCommentId, _secondaryCommentAlia, _secondaryCommentEmail, e) {
       const reply =  this.initDeepComment()
@@ -87,7 +88,7 @@ export default {
       const alia = document.querySelector('.deep-reply-container .alia')
       const email = document.querySelector('.deep-reply-container .email')
       alia.value = localStorage.getItem('alia')
-      email.value = localStorage.getItem('email')
+      email.value = localStorage.getItem('email') || ''
 
       window.cancel = this.cancel
       window.deepCreateCommet = this.deepCreateCommet
@@ -133,6 +134,8 @@ export default {
       localStorage.setItem('avatar', this.avatar)
       this.cancel()
       this.getComments();
+      this.$toast('评论成功', 3000, { left: '50%', bottom: '40px' })
+      this.$refs.reply.comment.email = email.value
     },
     initDeepComment() {
       let reply = document.getElementById('reply');

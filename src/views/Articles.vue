@@ -14,7 +14,7 @@ main.articles
 import { getList } from '@/api/article';
 import TopNav from '@/components/TopNav/index';
 export default {
-  name: 'List',
+  name: 'Articles',
   components: { TopNav },
   data() {
     return {

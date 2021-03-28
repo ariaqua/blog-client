@@ -5,12 +5,15 @@ import router from './router'
 import '@/styles/index.scss'
 import '@/styles/modest.scss'
 
+import toast from '@/util/toast'
+
 import * as directives from '@/directives/index'
 
 const app = createApp(App)
 
+app.config.globalProperties.$toast = toast
+
 Object.keys(directives).forEach(key => {
-  console.log(directives)
   app.directive(key, directives[key])
 })
 
