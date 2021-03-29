@@ -78,12 +78,6 @@ export default {
   margin-bottom: 12px;
 }
 
-// .title,
-// .date,
-// .summary {
-//   padding: 0 16px;
-// }
-
 .date {
   font-size: 14px;
   color: #bbb;
@@ -93,7 +87,7 @@ export default {
 .title {
   display: block;
   color: #333;
-  font-size: 24px;
+  font-size: 20px;
   text-decoration: none;
   transition: all 0.25s;
   &:visited {
@@ -119,6 +113,7 @@ export default {
   text-align: center;
   cursor: pointer;
   transition: all 0.25s;
+  user-select: none;
 }
 
 .load-more {
@@ -132,11 +127,14 @@ export default {
   color: #ccc;
 }
 
-// @media (min-width: 576px) {
-//   .title,
-//   .date,
-//   .summary {
-//     padding: 0 32px;
-//   }
-// }
+@media (min-width: 576px) {
+  .title,
+  .date,
+  .summary {
+    padding: 0 32px;
+  }
+  .title {
+    font-size: 24px;
+  }
+}
 </style>
