@@ -74,12 +74,8 @@ export default {
   mounted() {
     snow()
     window.addEventListener('resize', snow.prototype.onResize)
-    console.log(this.$refs.audio.duration)
-    this.$refs.audio.addEventListener("canplay", () => {
-      console.log('canplay');
-      console.log(this.$refs.audiobuffered)
-      console.log(this.$refs.audio.duration)
-    });
+    // this.$refs.audio.addEventListener("canplay", () => {
+    // });
   },
   unmounted() {
     window.removeEventListener('resize', snow.prototype.onResize)
@@ -92,7 +88,6 @@ export default {
         : this.$refs.audio.play()
     },
     updateTime(e) {
-      console.log(this.currentTime / this.duration * 100 + '%')
       this.currentTime = e.target.currentTime
       this.duration = e.target.duration
     }

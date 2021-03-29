@@ -95,6 +95,10 @@ export default {
   z-index: 100;
 }
 
+.title {
+  font-size: 24px;
+}
+
 .header-picture {
   width: 100%;
   height: 70vw;

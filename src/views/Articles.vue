@@ -78,11 +78,11 @@ export default {
   margin-bottom: 12px;
 }
 
-.title,
-.date,
-.summary {
-  padding: 0 16px;
-}
+// .title,
+// .date,
+// .summary {
+//   padding: 0 16px;
+// }
 
 .date {
   font-size: 14px;
@@ -91,6 +91,7 @@ export default {
 }
 
 .title {
+  display: block;
   color: #333;
   font-size: 24px;
   text-decoration: none;
@@ -131,11 +132,11 @@ export default {
   color: #ccc;
 }
 
-@media (min-width: 576px) {
-  .title,
-  .date,
-  .summary {
-    padding: 0 32px;
-  }
-}
+// @media (min-width: 576px) {
+//   .title,
+//   .date,
+//   .summary {
+//     padding: 0 32px;
+//   }
+// }
 </style>

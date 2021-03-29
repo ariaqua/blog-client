@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from '../views/Home.vue'
 import Articles from '../views/Articles.vue'
 import Detail from '../views/Detail.vue'
@@ -22,14 +22,14 @@ const routes = [
     component: Detail,
     props: true
   },
-  {
-    path: '/profile',
-    name: 'Profile',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/Profile.vue')
-  },
+  // {
+  //   path: '/profile',
+  //   name: 'Profile',
+  //   // route level code-splitting
+  //   // this generates a separate chunk (about.[hash].js) for this route
+  //   // which is lazy-loaded when the route is visited.
+  //   component: () => import(/* webpackChunkName: "profile" */ '../views/Profile.vue')
+  // },
   {
     path: '/error',
     name: 'Error',

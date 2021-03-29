@@ -42,7 +42,7 @@ export default {
 
 <style lang="scss" scoped>
 .nav {
-  height: 72px;
+  height: 56px;
   background-color: white;
   border-bottom: 1px solid whitesmoke;
   display: flex;
