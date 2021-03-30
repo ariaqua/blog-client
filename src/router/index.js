@@ -14,7 +14,8 @@ const routes = [
   {
     path: '/articles',
     name: 'Articles',
-    component: Articles
+    component: Articles,
+    meta: { title: 'Articles' }
   },
   {
     path: '/articles/:id',
@@ -33,7 +34,8 @@ const routes = [
   {
     path: '/error',
     name: 'Error',
-    component: Error
+    component: Error,
+    meta: { title: 'Error' }
   },
   {
     path: '/:pathMatch(.*)',
@@ -51,8 +53,15 @@ const router = createRouter({
     } else {
       return { top: 0 }
     }
-    
   },
+})
+
+router.beforeEach(to => {
+  if (to.meta.title) {
+    document.title = to.meta.title
+  } else {
+    document.title = 'VAQUA'
+  }
 })
 
 export default router
