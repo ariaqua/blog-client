@@ -21,7 +21,7 @@ export default {
       list: [],
       count: 0,
       skip: 0,
-      take: 1,
+      take: 10,
       isLoading: false,
     };
   },

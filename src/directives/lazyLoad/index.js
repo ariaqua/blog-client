@@ -1,5 +1,5 @@
-const placeholder = 'https://img.zcool.cn/community/01bf7560503daa11013fb11748c517.jpg@1280w_1l_2o_100sh.jpg'
-const errorImg = 'https://img.zcool.cn/community/01a17f6050c98d11013e87f41d8195.jpg@1280w_1l_2o_100sh.jpg'
+const placeholder = require('@/assets/loading.png')
+const errorImg = require('@/assets/failed.png')
 
 const io = function(bindding) {
   return new IntersectionObserver(

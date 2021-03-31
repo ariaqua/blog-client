@@ -1,24 +1,12 @@
 # blog-client
 
-## Project setup
-```
-npm install
-```
+个人博客客户端, 练习项目
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 功能特性
 
-### Compiles and minifies for production
-```
-npm run build
-```
+- 文章列表
+- 文章详情
+- 评论
 
-### Lints and fixes files
-```
-npm run lint
-```
+## 
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
