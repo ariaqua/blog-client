@@ -1,9 +1,14 @@
 // eslint-disable-next-line no-unused-vars
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '../views/Home.vue'
-import Articles from '../views/Articles.vue'
-import Detail from '../views/Detail.vue'
-import Error from '../views/Error.vue'
+// import Home from '../views/Home.vue'
+// import Articles from '../views/Articles.vue'
+// import Detail from '../views/Detail.vue'
+// import Error from '../views/Error.vue'
+
+const Home = () => import('../views/Home.vue') 
+const Articles = () => import('../views/Articles.vue') 
+const Detail = () => import('../views/Detail.vue') 
+const Error = () => import('../views/Error.vue') 
 
 const routes = [
   {

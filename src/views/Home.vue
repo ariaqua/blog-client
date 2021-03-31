@@ -1,6 +1,20 @@
 <template>
   <div class="home">
-    <canvas id="canvas">This browser cannot use a canvas.</canvas>
+    <transition name="fade">
+      <div v-if="imgLoading" class="mask">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="100px" height="100px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <circle cx="50" cy="50" r="0" fill="none" stroke="#e90c59" stroke-width="4">
+            <animate attributeName="r" repeatCount="indefinite" dur="2s" values="0;40" keyTimes="0;1" keySplines="0 0.2 0.8 1" calcMode="spline" begin="0s"></animate>
+            <animate attributeName="opacity" repeatCount="indefinite" dur="2s" values="1;0" keyTimes="0;1" keySplines="0.2 0 0.8 1" calcMode="spline" begin="0s"></animate>
+          </circle><circle cx="50" cy="50" r="0" fill="none" stroke="#46dff0" stroke-width="4">
+            <animate attributeName="r" repeatCount="indefinite" dur="2s" values="0;40" keyTimes="0;1" keySplines="0 0.2 0.8 1" calcMode="spline" begin="-1s"></animate>
+            <animate attributeName="opacity" repeatCount="indefinite" dur="2s" values="1;0" keyTimes="0;1" keySplines="0.2 0 0.8 1" calcMode="spline" begin="-1s"></animate>
+          </circle>
+        </svg>
+      </div>
+    </transition>
+    
+    <canvas id="canvas"></canvas>
     <div class="profile">
       <!-- <h1 class="title">VAQUA'BLOG</h1> -->
       <p class="_-_">
@@ -39,8 +53,20 @@
       </div>
       <div class="player">
         <span>BGM: いのちの名前 &nbsp;</span>
-        <svg v-if="!play" @click="toggle" t="1616908749565" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2138"><path d="M377.567 153.513H243.134c-24.69 0-44.812 20.121-44.812 44.812v627.354c0 24.691 20.119 44.812 44.812 44.812h134.433c24.691 0 44.812-20.121 44.812-44.812V198.325c0-24.691-20.121-44.812-44.812-44.812z m403.299 0H646.433c-24.691 0-44.812 20.121-44.812 44.812v627.354c0 24.691 20.121 44.812 44.812 44.812h134.433c24.69 0 44.812-20.121 44.812-44.812V198.325c0-24.691-20.119-44.812-44.812-44.812z" p-id="2139"></path></svg>
-        <svg v-else @click="toggle" t="1616908794500" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2279"><path d="M812.581 617.683c-19.828 9.914-301.989 213.255-453.792 289.122-115.733 57.867-198.349-41.483-198.349-111.796V201.227c0-63.701 103.709-144.139 198.278-96.89 147.162 73.546 419.55 276.747 442.963 288.489 76.78 38.389 84.023 188.295 10.898 224.856z" p-id="2280"></path></svg>
+        <svg v-if="musicLoading" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+          <circle cx="30" cy="50" fill="#85a2b6" r="20">
+            <animate attributeName="cx" repeatCount="indefinite" dur="1s" keyTimes="0;0.5;1" values="30;70;30" begin="-0.5s"></animate>
+          </circle>
+          <circle cx="70" cy="50" fill="#bbcedd" r="20">
+            <animate attributeName="cx" repeatCount="indefinite" dur="1s" keyTimes="0;0.5;1" values="30;70;30" begin="0s"></animate>
+          </circle>
+          <circle cx="30" cy="50" fill="#85a2b6" r="20">
+            <animate attributeName="cx" repeatCount="indefinite" dur="1s" keyTimes="0;0.5;1" values="30;70;30" begin="-0.5s"></animate>
+            <animate attributeName="fill-opacity" values="0;0;1;1" calcMode="discrete" keyTimes="0;0.499;0.5;1" dur="1s" repeatCount="indefinite"></animate>
+          </circle>
+        </svg>
+        <svg v-if="!musicLoading && play" @click="toggle" t="1616908794500" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2279"><path d="M812.581 617.683c-19.828 9.914-301.989 213.255-453.792 289.122-115.733 57.867-198.349-41.483-198.349-111.796V201.227c0-63.701 103.709-144.139 198.278-96.89 147.162 73.546 419.55 276.747 442.963 288.489 76.78 38.389 84.023 188.295 10.898 224.856z" p-id="2280"></path></svg>
+        <svg v-if="!musicLoading && !play" @click="toggle" t="1616908749565" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2138"><path d="M377.567 153.513H243.134c-24.69 0-44.812 20.121-44.812 44.812v627.354c0 24.691 20.119 44.812 44.812 44.812h134.433c24.691 0 44.812-20.121 44.812-44.812V198.325c0-24.691-20.121-44.812-44.812-44.812z m403.299 0H646.433c-24.691 0-44.812 20.121-44.812 44.812v627.354c0 24.691 20.121 44.812 44.812 44.812h134.433c24.69 0 44.812-20.121 44.812-44.812V198.325c0-24.691-20.119-44.812-44.812-44.812z" p-id="2139"></path></svg>
       </div>
     </div>
     <div class="progress">
@@ -48,6 +74,7 @@
     </div>
     <audio
       ref="audio"
+      preload="auto"
       loop 
       :src="url"
       @error="error"
@@ -61,9 +88,12 @@ export default {
   data() {
     return {
       play: true,
+      musicLoading: true,
+      canplay: true,
       url: 'https://music.163.com/song/media/outer/url?id=578090.mp3',
       currentTime: 0,
-      duration: 0
+      duration: 0,
+      imgLoading: true
     }
   },
   computed: {
@@ -74,8 +104,10 @@ export default {
   mounted() {
     snow()
     window.addEventListener('resize', snow.prototype.onResize)
-    // this.$refs.audio.addEventListener("canplay", () => {
-    // });
+    this.$refs.audio.addEventListener("canplay", () => {
+      this.musicLoading = false
+    });
+    this.loadingImg()
   },
   unmounted() {
     window.removeEventListener('resize', snow.prototype.onResize)
@@ -90,6 +122,13 @@ export default {
     updateTime(e) {
       this.currentTime = e.target.currentTime
       this.duration = e.target.duration
+    },
+    loadingImg() {
+      const img = new Image()
+      img.src = 'https://www.vaqua.top/uploads/image/file-1616998627690-494218404.webp'
+      img.onload = () => {
+        this.imgLoading = false
+      }
     }
   },
 }
@@ -98,7 +137,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap');
 .home {
   height: 100vh;
-  background: url('../assets/lofi.webp') no-repeat center/cover;
+  background: url('https://www.vaqua.top/uploads/image/file-1616998627690-494218404.webp') no-repeat center/cover;
   color: white;
   font-family: 'Lato', sans-serif;
   .profile {
@@ -138,6 +177,7 @@ export default {
     }
   }
   .player {
+    height: 24px;
     font-size: 14px;
     display: flex;
     align-items: center;
@@ -167,6 +207,17 @@ export default {
       background-color: tomato;
     }
   }
+}
+
+.mask {
+  position: fixed;
+  z-index: 100;
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 
