@@ -2,15 +2,7 @@
   <div class="home">
     <transition name="fade">
       <div v-if="imgLoading" class="mask">
-        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="100px" height="100px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-          <circle cx="50" cy="50" r="0" fill="none" stroke="#e90c59" stroke-width="4">
-            <animate attributeName="r" repeatCount="indefinite" dur="2s" values="0;40" keyTimes="0;1" keySplines="0 0.2 0.8 1" calcMode="spline" begin="0s"></animate>
-            <animate attributeName="opacity" repeatCount="indefinite" dur="2s" values="1;0" keyTimes="0;1" keySplines="0.2 0 0.8 1" calcMode="spline" begin="0s"></animate>
-          </circle><circle cx="50" cy="50" r="0" fill="none" stroke="#46dff0" stroke-width="4">
-            <animate attributeName="r" repeatCount="indefinite" dur="2s" values="0;40" keyTimes="0;1" keySplines="0 0.2 0.8 1" calcMode="spline" begin="-1s"></animate>
-            <animate attributeName="opacity" repeatCount="indefinite" dur="2s" values="1;0" keyTimes="0;1" keySplines="0.2 0 0.8 1" calcMode="spline" begin="-1s"></animate>
-          </circle>
-        </svg>
+        <img src="../assets/loading.svg">
       </div>
     </transition>
     
