@@ -96,10 +96,8 @@ export default {
   mounted() {
     snow()
     window.addEventListener('resize', snow.prototype.onResize)
-    this.$refs.audio.addEventListener("canplay", () => {
-      this.musicLoading = false
-    });
     this.loadingImg()
+    this.loadingMusic()
   },
   unmounted() {
     window.removeEventListener('resize', snow.prototype.onResize)
@@ -120,6 +118,16 @@ export default {
       img.src = 'https://www.vaqua.top/uploads/image/file-1616998627690-494218404.webp'
       img.onload = () => {
         this.imgLoading = false
+      }
+    },
+    loadingMusic() {
+      let isIOS = !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/);
+      if (isIOS) {
+        this.musicLoading = false
+      } else {
+        this.$refs.audio.addEventListener("canplay", () => {
+          this.musicLoading = false
+        });
       }
     }
   },

@@ -85,7 +85,6 @@ export default {
 }
 
 .title {
-  display: block;
   color: #333;
   font-size: 20px;
   text-decoration: none;

@@ -26,7 +26,8 @@ export default {
   data() {
     return {
       article: {},
-      y: 0
+      y: 100,
+      active: false
     };
   },
   beforeMount() {
@@ -66,7 +67,8 @@ export default {
           nav.style.transform = 'translateY(0)'
         }
         setTimeout(() => {
-          this.y = _y
+          // fix: ios 顶部回弹问题
+          if (_y > 100) this.y = _y
         }, 20);
       }, 500
     ),

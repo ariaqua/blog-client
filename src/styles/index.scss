@@ -54,6 +54,16 @@ main {
   opacity: 0;
 }
 
+.slide-enter-active,
+.slide-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translate3d(0, -100%, 0);
+}
+
 @media (min-width: 576px) {
   main {
     margin: 42px auto;
