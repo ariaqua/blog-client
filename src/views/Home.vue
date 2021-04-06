@@ -37,7 +37,7 @@
       <div class="links">
         <div class="link-wrapper external">
           <span>Wallpaper from: &nbsp;</span> 
-          <a class="link" href="https://www.youtube.com/channel/UCSJ4gkVC6NrvII8umztf0Ow" target="_blank">Lofi Girl</a>
+          <a class="link" href="https://cn.bing.com" target="_blank">Bing</a>
           <svg t="1616747787226" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1344" width="16" height="16">
             <path d="M864 640a32 32 0 0 1 64 0v224.096A63.936 63.936 0 0 1 864.096 928H159.904A63.936 63.936 0 0 1 96 864.096V159.904C96 124.608 124.64 96 159.904 96H384a32 32 0 0 1 0 64H192.064A31.904 31.904 0 0 0 160 192.064v639.872A31.904 31.904 0 0 0 192.064 864h639.872A31.904 31.904 0 0 0 864 831.936V640z m-485.184 52.48a31.84 31.84 0 0 1-45.12-0.128 31.808 31.808 0 0 1-0.128-45.12L815.04 166.048l-176.128 0.736a31.392 31.392 0 0 1-31.584-31.744 32.32 32.32 0 0 1 31.84-32l255.232-1.056a31.36 31.36 0 0 1 31.584 31.584L924.928 388.8a32.32 32.32 0 0 1-32 31.84 31.392 31.392 0 0 1-31.712-31.584l0.736-179.392L378.816 692.48z" fill="#ffffff" p-id="1345"></path>
           </svg>
@@ -115,7 +115,7 @@ export default {
     },
     loadingImg() {
       const img = new Image()
-      img.src = 'https://www.vaqua.top/uploads/image/file-1616998627690-494218404.webp'
+      img.src = 'https://cn.bing.com/th?id=OHR.Olympics125_ZH-CN3521721828_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp'
       img.onload = () => {
         this.imgLoading = false
       }
@@ -137,7 +137,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;700&display=swap');
 .home {
   height: 100vh;
-  background: url('https://www.vaqua.top/uploads/image/file-1616998627690-494218404.webp') no-repeat center/cover;
+  background: url('https://cn.bing.com/th?id=OHR.Olympics125_ZH-CN3521721828_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp') no-repeat center/cover;
   color: white;
   font-family: 'Lato', sans-serif;
   .profile {
